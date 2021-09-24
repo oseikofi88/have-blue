@@ -1,0 +1,92 @@
+swagger: "2.0"
+info:
+  description: "This is a HB's API."
+  version: "1.0.0"
+  title: "Have Blue"
+  contact:
+    email: "oseikofi88@yahoo.com  "
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "petstore.swagger.io"
+basePath: "/v2"
+tags:
+  - name: "twitter"
+    description: "Twitter service for item search"
+schemes:
+  - "https"
+paths:
+  /twitter/search:
+    get:
+      tags:
+        - "twitter"
+      summary: "Search for your answer on twitter"
+      description: "This is the twitter search route"
+      operationId: "findPetsByStatus"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "searchPhrase"
+          in: "query"
+          description: "The phrase that needs to be searched on twitter for answers"
+          required: true
+          type: string
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Twitter"
+        "400":
+          description: "Invalid status value"
+      security:
+        - petstore_auth:
+            - "write:pets"
+            - "read:pets"
+securityDefinitions:
+  petstore_auth:
+    type: "oauth2"
+    authorizationUrl: "http://petstore.swagger.io/oauth/dialog"
+    flow: "implicit"
+    scopes:
+      write:pets: "modify pets in your account"
+      read:pets: "read your pets"
+  api_key:
+    type: "apiKey"
+    name: "api_key"
+    in: "header"
+definitions:
+  Twitter:
+    type: "object"
+    required:
+      - "name"
+      - "photoUrls"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      userName:
+        type: string
+        example: oseikofi88
+      fullName:
+        type: string
+        example: Frimpong Richard
+      email:
+        type: string
+        example: oseikofi88
+      profilePicture:
+        type: string
+        example: https://image.shutterstock.com/shutterstock/photos/1930098281/display_1500/stock-vector-profile-flat-icon-vector-illustration-1930098281.jpg
+      phoneNumber:
+        type: string
+        example: 0206612483
+      searchKeywordMatchingText:
+        type: string
+        example: "I got new glasses from @linkupstephen and the work rate was Hundred points symbol. I sent him a photo of the frames, my prescription, he sent me a bill, made them, and delivered them to me with my PhotoAR and everything. Dm him if you’re looking for a new pair. Use code ‘SHORSHOR’ for 10% off."
+      searchKeywordMatchingImage:
+        type: string
+        example: "https://twitter.com/_shorshor/status/1429477930279788548/photo/1"
+      searchKeywordMatchingAudio:
+        type: string
+        example: ""
