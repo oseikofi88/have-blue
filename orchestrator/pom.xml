@@ -87,6 +87,14 @@
 
 
 
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-rabbitmq-starter</artifactId>
+      <!-- use the same version as your Camel core version -->
+    </dependency>
+
+
+
     <!-- Test -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
