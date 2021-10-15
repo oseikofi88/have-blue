@@ -2,6 +2,7 @@ package io.greyparrot.Routes;
 
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,27 +12,24 @@ public class GoogleSearch extends RouteBuilder {
     public void configure() {
 
 
+        //todo for errors throw it to the top of the function and handle it as appropriate
+
+
         from("direct:google")
-//                .toD("${env:GOOGLE_APIS_ENDPOINT}/customsearch/v1?cx=${env:GOOGLE_SEARCH_ENGINE_ID}&exactTerms=${body}&num=${env:GOOGLE_NUMBER_OF_RESULTS}&searchType=image&key=${env:GOOGLE_API_KEY}")
-                .toD("https://run.mocky.io/v3/49944f3a-3d9e-4e60-a7ba-cdb5f3310093")
+                .toD("${env:GOOGLE_APIS_ENDPOINT}/customsearch/v1?cx=${env:GOOGLE_SEARCH_ENGINE_ID}&exactTerms=${body}&num=${env:GOOGLE_NUMBER_OF_RESULTS}&searchType=image&key=${env:GOOGLE_API_KEY}")
                 .convertBodyTo(String.class)
                 .log("response code google search is: ${header.CamelHttpResponseCode}")
                 .log("response body from google search: ${body}")
-//                .when().jsonpath("$.searchInformation[?(@.totalResults == '0')]")
-//                .log("The search information yielded no results")
-                .split(jsonpath("$.items.*.link"))
-                .to("direct:imageLink")
-//                .otherwise()
-//                .log("Search information yielded so much results")
+                .choice().when (jsonpath("$.items.*.link"))
+                .setBody().jsonpath("$.items.*.link")
+                .setHeader("numberOfLinks",constant(jsonpath("$.length()")))
+                .marshal().json(JsonLibrary.Jackson)
+                .setExchangePattern(ExchangePattern.InOnly)
+                .toD("rabbitmq:image_links?queue=image_links&autoDelete=false")
+                .otherwise()
+                .log("The links could not be obtained")
                 .end();
 
-//                .split(simple("${body}"))
-
-        from("direct:imageLink")
-                .log("Getting some links hold on")
-                .log("${body}")
-                .setExchangePattern(ExchangePattern.InOnly)
-                .toD("rabbitmq:image_links?queue=image_links&autoDelete=false");
 
 
     }
