@@ -5,6 +5,8 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class GoogleSearch extends RouteBuilder {
 
@@ -24,6 +26,7 @@ public class GoogleSearch extends RouteBuilder {
                 .choice().when (jsonpath("$.items.*.link"))
                 .setBody().jsonpath("$.items.*.link")
                 .setHeader("numberOfLinks",constant(jsonpath("$.length()")))
+                .setHeader("traceId",constant(UUID.randomUUID().toString()))
                 .marshal().json(JsonLibrary.Jackson)
                 .setExchangePattern(ExchangePattern.InOnly)
                 .toD("rabbitmq:image_links?queue=image_links&autoDelete=false")

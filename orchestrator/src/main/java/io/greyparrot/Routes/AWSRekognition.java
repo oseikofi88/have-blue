@@ -1,16 +1,10 @@
 package io.greyparrot.Routes;
-
-import net.minidev.json.JSONArray;
 import org.apache.camel.AggregationStrategy;
 import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
-import org.apache.camel.builder.AggregationStrategies;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.language.bean.Bean;
-import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 @Component
 public class AWSRekognition extends RouteBuilder {
@@ -21,19 +15,18 @@ public class AWSRekognition extends RouteBuilder {
         from("rabbitmq:image_links?queue=image_links&autoDelete=false")
                 .log("${body}")
                 .log("${header.numberOfLinks}")
+                .setHeader("Accept", simple("binary"))//Change it according to the file content
+                .setHeader(Exchange.HTTP_METHOD, constant("GET"))
                 .split()
                 .jsonpath("$")
                 .streaming()
-//                .parallelProcessing()
+                .parallelProcessing()
 //                .parallelAggregate()
                 .log("Split performed")
-                .log("${body}")
-                .to("https://run.mocky.io/v3/05b252dc-c5fd-4c83-835e-ceda4c71d09b")
-                .convertBodyTo(String.class)
-                .aggregate(new ArrayListAggregationStrategy())
-                .constant(true)
-                .completionSize(simple("header.numberOfLinks"))
-                .log("${body}")
+                .toD("${body}")
+                .toD("file:images?fileName=${header.CamelSplitIndex}-${header.traceID}-"+ LocalDateTime.now())
+                .log("Done")
+                //put it in folder
                 .end();
 
     }
