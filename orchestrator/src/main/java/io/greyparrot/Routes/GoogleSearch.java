@@ -13,6 +13,7 @@ public class GoogleSearch extends RouteBuilder {
 
 
         //todo for errors throw it to the top of the function and handle it as appropriate
+        //todo  handling for files less than 12mb and only jpg and png files need to be done
 
 
         from("direct:google")
