@@ -25,7 +25,7 @@ public class AWSRekognition extends RouteBuilder {
                 .toD("${body}")
                 .toD("file:images?fileName=${header.CamelSplitIndex}-${header.traceId}-"+ LocalDateTime.now())
                 .end()
-                .log("Done downloading of images");
+                .log("Done downloading images");
 
     }
 
