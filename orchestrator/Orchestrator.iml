@@ -174,5 +174,14 @@
     <orderEntry type="library" name="Maven: org.apache.camel:camel-management-api:3.7.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.camel:camel-core-xml:3.7.6" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.3.10" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.camel.springboot:camel-aws-s3-starter:3.7.6" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.camel:camel-aws-s3:3.7.6" level="project" />
+    <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-s3:1.11.714" level="project" />
+    <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-kms:1.11.714" level="project" />
+    <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-core:1.11.714" level="project" />
+    <orderEntry type="library" name="Maven: software.amazon.ion:ion-java:1.0.2" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.12.5" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.8.1" level="project" />
+    <orderEntry type="library" name="Maven: com.amazonaws:jmespath-java:1.11.714" level="project" />
   </component>
 </module>
