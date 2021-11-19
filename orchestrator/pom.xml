@@ -93,6 +93,17 @@
       <!-- use the same version as your Camel core version -->
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk</artifactId>
+      <version>1.12.93</version>
+    </dependency>
+
+
+
+
+
 
 
     <!-- Test -->
