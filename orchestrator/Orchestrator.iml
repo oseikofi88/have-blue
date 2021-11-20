@@ -110,7 +110,6 @@
     <orderEntry type="library" name="Maven: commons-pool:commons-pool:1.6" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-panorama:1.12.93" level="project" />
-    <orderEntry type="library" name="Maven: com.amazonaws:jmespath-java:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-managedgrafana:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-cloudcontrolapi:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-account:1.12.93" level="project" />
@@ -380,7 +379,6 @@
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-discovery:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-applicationautoscaling:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-snowball:1.12.93" level="project" />
-    <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-rekognition:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-polly:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-lightsail:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-stepfunctions:1.12.93" level="project" />
@@ -402,6 +400,8 @@
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.8.1" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-models:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-swf-libraries:1.11.22" level="project" />
+    <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-rekognition:1.12.78" level="project" />
+    <orderEntry type="library" name="Maven: com.amazonaws:jmespath-java:1.12.78" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-starter-test:2.5.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test:2.5.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.boot:spring-boot-test-autoconfigure:2.5.5" level="project" />

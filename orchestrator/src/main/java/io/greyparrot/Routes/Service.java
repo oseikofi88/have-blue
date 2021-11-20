@@ -13,17 +13,15 @@ import com.amazonaws.services.rekognition.AmazonRekognition;
 import com.amazonaws.services.rekognition.AmazonRekognitionClientBuilder;
 import com.amazonaws.services.rekognition.model.AmazonRekognitionException;
 import org.apache.camel.Exchange;
-import org.apache.commons.logging.Log;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 
 public class Service {
 
 
     public static void getLabelDetails(String photo,Exchange exchange){
         String bucketName = System.getenv("S3_BUCKET_NAME");
-        AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.defaultClient();
+        String awsRegion = System.getenv("AWS_REGION");
+
+        AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.standard().withRegion(awsRegion).build();
 
         DetectLabelsRequest request = new DetectLabelsRequest()
                 .withImage(new Image().withS3Object(new S3Object().withName(photo).withBucket(bucketName)))

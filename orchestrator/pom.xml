@@ -101,6 +101,12 @@
     </dependency>
 
 
+    <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-rekognition -->
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-rekognition</artifactId>
+      <version>1.12.78</version>
+    </dependency>
 
 
 
