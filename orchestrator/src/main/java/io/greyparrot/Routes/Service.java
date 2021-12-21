@@ -19,7 +19,7 @@ public class Service {
 
     public static void getLabelDetails(String photo,Exchange exchange){
         String bucketName = System.getenv("S3_BUCKET_NAME");
-        String awsRegion = System.getenv("AWS_REGION");
+        String awsRegion = System.getenv("AWS_REGION_SMALL_LETTERS");
 
         AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.standard().withRegion(awsRegion).build();
 
@@ -83,5 +83,23 @@ public class Service {
         else {
             exchange.getIn().setHeader("fileFormatIsCorrect",false);
         }
+    }
+
+    public String addUserNameInHeader(String username,String usernames){
+
+        if(usernames == null){
+            usernames = username;
+        }
+        else {
+            usernames = usernames.concat(","+username);
+        }
+
+       return usernames;
+    }
+
+    public void myMethod(Exchange exchange){
+        String usernames = exchange.getIn().getHeader("usernames", String.class);
+        System.out.println(usernames);
+
     }
 }

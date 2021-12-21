@@ -278,9 +278,7 @@
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-sagemakerruntime:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-kinesisvideo:1.12.93" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-codec-http:4.1.68.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.68.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.1.68.Final" level="project" />
-    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.68.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-codec:4.1.68.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-handler:4.1.68.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-resolver:4.1.68.Final" level="project" />
@@ -469,5 +467,20 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.3.10" level="project" />
     <orderEntry type="library" name="Maven: org.apache.camel.springboot:camel-aws-s3-starter:3.7.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.camel:camel-aws-s3:3.7.6" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.camel.springboot:camel-spring-redis-starter:3.7.6" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.camel:camel-spring-redis:3.7.6" level="project" />
+    <orderEntry type="library" name="Maven: redis.clients:jedis:3.6.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-pool2:2.9.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-redis:2.5.5" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-redis:2.5.5" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-keyvalue:2.5.5" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.data:spring-data-commons:2.5.5" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-oxm:5.3.10" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.3.10" level="project" />
+    <orderEntry type="library" name="Maven: io.lettuce:lettuce-core:6.1.5.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-common:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.68.Final" level="project" />
+    <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.4.10" level="project" />
+    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
   </component>
 </module>
