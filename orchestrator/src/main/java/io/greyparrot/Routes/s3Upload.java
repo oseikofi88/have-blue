@@ -1,13 +1,10 @@
 package io.greyparrot.Routes;
 
-
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.aws.s3.S3Constants;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
 
 @Component
 public class s3Upload extends RouteBuilder {

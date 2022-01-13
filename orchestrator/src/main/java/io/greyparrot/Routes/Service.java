@@ -13,6 +13,7 @@ import com.amazonaws.services.rekognition.AmazonRekognition;
 import com.amazonaws.services.rekognition.AmazonRekognitionClientBuilder;
 import com.amazonaws.services.rekognition.model.AmazonRekognitionException;
 import org.apache.camel.Exchange;
+import org.apache.commons.logging.Log;
 
 public class Service {
 
@@ -102,4 +103,31 @@ public class Service {
         System.out.println(usernames);
 
     }
+
+
+    public SearchResults formatResponse(String results){
+        System.out.println("This is the results passed " + results);
+
+        ArrayList<SearchResults.TwitterUsers> twitterUsers = new ArrayList<>();
+        String[] twitterUsernames = results.split(",");
+        for (String username :
+                twitterUsernames) {
+            twitterUsers.add(new SearchResults.TwitterUsers(username));
+        }
+
+        return new SearchResults(twitterUsers);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }

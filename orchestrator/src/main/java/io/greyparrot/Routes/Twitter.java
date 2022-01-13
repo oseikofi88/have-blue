@@ -53,6 +53,7 @@ public class Twitter extends RouteBuilder {
                 .setHeader("CamelRedis.End", constant(-1))
                 .toD("spring-redis://${env:REDIS_URL}?redisTemplate=#redisTemplate")
                 .log("${body}")
+                .toD("${env:ORCHESTRATOR_ENDPOINT}/lookup-results?results=${body}")
                 .otherwise()
                 .log("There was an error with some stuff so we cannot process")
                 .end();
