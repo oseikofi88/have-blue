@@ -1,12 +1,16 @@
 package io.greyparrot.Routes;
 
 import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.redis.RedisConstants;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class Twitter extends RouteBuilder {
@@ -52,6 +56,15 @@ public class Twitter extends RouteBuilder {
                 .setHeader("CamelRedis.Start", constant(0))
                 .setHeader("CamelRedis.End", constant(-1))
                 .toD("spring-redis://${env:REDIS_URL}?redisTemplate=#redisTemplate")
+                .process(new Processor() {
+                    //code smell, please refactor
+                    public void process(Exchange exchange) throws Exception {
+                        String payload = exchange.getMessage().getBody(String.class);
+                        String[] content = payload.split(",");
+                        ArrayList<String> finalContent = (ArrayList<String>) Arrays.stream(content).distinct().collect(Collectors.toList());
+                        // do something with the payload and/or exchange here
+                        exchange.getMessage().setBody(finalContent);
+                    }})//                .log("Start process to save to s3")
                 .log("${body}")
                 .toD("http://localhost:8080/lookup-results?results=${body}")
                 .otherwise()
