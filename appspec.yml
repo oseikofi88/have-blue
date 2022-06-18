@@ -6,10 +6,10 @@ files:
 
 hooks:
   ApplicationStop:
-    - location: scripts/stop-have-blue.sh
+    - location: stop-have-blue.sh
       timeout: 180
       runas: root
   ApplicationStart:
-    - location: scripts/start-have-blue.sh
+    - location: start-have-blue.sh
       timeout: 180
       runas: root
