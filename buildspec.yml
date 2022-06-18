@@ -18,4 +18,6 @@ artifacts:
   files:
     - target/Orchestrator-1.0-SNAPSHOT.jar
     - appspec.yml
+    - scripts/start-have-blue.sh
+    - scripts/stop-have-blue.sh
   discard-paths: yes
