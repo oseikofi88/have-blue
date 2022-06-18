@@ -2,4 +2,14 @@ version: 0.0
 os: linux
 files:
   - source: ./Orchestrator-1.0-SNAPSHOT.jar
-    destination: /tmp
+    destination: /home/ubuntu/have-blue
+
+hooks:
+  ApplicationStop:
+    - location: scripts/stop-have-blue.sh
+      timeout: 180
+      runas: root
+  ApplicationStart:
+    - location: scripts/start-have-blue.sh
+      timeout: 180
+      runas: root
