@@ -17,7 +17,7 @@ public class Twitter extends RouteBuilder {
 
     @Override
     public void configure() {
-        from("rabbitmq:labels?queue=twitter&autoDelete=false&exchangeType=fanout")
+        from("{{LABELS_QUEUE}}")
                 .log("this is twitter's body ${body}")
                 .unmarshal().json(JsonLibrary.Jackson)
                 .log("this is twitter's body after marshal ${body.size()}")
@@ -66,7 +66,6 @@ public class Twitter extends RouteBuilder {
                         exchange.getMessage().setBody(finalContent);
                     }})//                .log("Start process to save to s3")
                 .log("${body}")
-                .toD("http://localhost:8080/lookup-results?results=${body}")
                 .otherwise()
                 .log("There was an error with some stuff so we cannot process")
                 .end();

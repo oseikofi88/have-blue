@@ -12,14 +12,13 @@ public class AWSRekognition extends RouteBuilder {
     @Override
     public void configure() {
 
-        from("rabbitmq:s3_links?queue=s3_links&autoDelete=false")
+        from("{{S3_LINKS_QUEUE}}")
                 .log("${body}")
 //                .bean(Service.class, "getOldLabelDetails")
                 .log(" body after label call is ${body}")
                 .marshal().json(JsonLibrary.Jackson)
                 .setExchangePattern(ExchangePattern.InOnly)
-                .toD("rabbitmq:labels?queue=labels&autoDelete=false&" +
-                        "exchangeType=fanout")
+                .toD("{{LABELS_QUEUE}}")
                 .log("Done pushing to labels queue");
 
 

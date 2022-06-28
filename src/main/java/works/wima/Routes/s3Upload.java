@@ -46,8 +46,7 @@ public class s3Upload extends RouteBuilder {
 //                .setBody(simple("${header.CamelFileName}"))
                 .marshal().json(JsonLibrary.Jackson)
                 .setExchangePattern(ExchangePattern.InOnly)
-                .toD("rabbitmq:labels?queue=labels&autoDelete=false&" +
-                        "exchangeType=fanout")
+                .toD("{{LABELS_QUEUE}}")
                 .log("Done pushing to labels queue")
                 .end();
     }

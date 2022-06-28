@@ -15,7 +15,8 @@ public class ImagesSave extends RouteBuilder {
 
     @Override
     public void configure() {
-        from("rabbitmq:image_links?queue=image_links&autoDelete=false")
+
+        from("{{IMAGE_LINKS_QUEUE}}")
                 .log("${body}")
                 .log("${header.traceId}")
                 .unmarshal().json(JsonLibrary.Jackson)

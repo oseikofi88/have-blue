@@ -30,7 +30,7 @@ public class GoogleSearch extends RouteBuilder {
                 .log("The number of links are ${header.numberOfLinks}")
                 .marshal().json(JsonLibrary.Jackson)
                 .setExchangePattern(ExchangePattern.InOnly)
-                .toD("rabbitmq:image_links?queue=image_links&autoDelete=false")
+                .toD("{{IMAGE_LINKS_QUEUE}}")
                 .otherwise()
                 .log("The links could not be obtained")
                 .end();
