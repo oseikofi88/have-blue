@@ -11,12 +11,21 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class RedisConfiguration {
 
+
+        String REDIS_HOST = System.getenv("REDIS_HOST");
+        int REDIS_PORT = Integer.parseInt(System.getenv("REDIS_PORT"));
+        String REDIS_PASSWORD = System.getenv("REDIS_PASSWORD");
+
     @Bean("redisTemplate")
     public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory connectionFactory) {
+        connectionFactory.getStandaloneConfiguration().setHostName(REDIS_HOST);
+        connectionFactory.getStandaloneConfiguration().setPort(REDIS_PORT);
+        connectionFactory.getStandaloneConfiguration().setPassword(REDIS_PASSWORD);
 
         RedisTemplate<String, Object> template = new RedisTemplate<>();
 
         template.setConnectionFactory(connectionFactory);
+
 
         template.setKeySerializer(new StringRedisSerializer());
         template.setValueSerializer(new StringRedisSerializer());
