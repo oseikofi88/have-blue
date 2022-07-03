@@ -154,7 +154,7 @@ public class Service {
             numberOfValidImageLinks =  Integer.parseInt(exchange.getProperty("numberOfValidImageLinks").toString());
         }
         else {
-            System.out.println("the number of valid image links is nulllllll and it is emtpy as well");
+            System.out.println("the number of valid image links is null and it is emtpy as well");
 
         }
         String imageUrl = exchange.getIn().getBody(String.class);

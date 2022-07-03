@@ -23,7 +23,7 @@ public class GoogleSearch extends RouteBuilder {
                 .convertBodyTo(String.class)
                 .log("response code google search is: ${header.CamelHttpResponseCode}")
                 .log("response body from google search: ${body}")
-                .choice().when (jsonpath("$.items.*.link"))
+                .choice().when (jsonpath("$.items[?(@.image.byteSize < 500000 )].link"))
                 .setBody().jsonpath("$.items.*.link")
                 .setHeader("numberOfLinks",jsonpath("$.length()"))
                 .setHeader("traceId",constant(UUID.randomUUID().toString()))
