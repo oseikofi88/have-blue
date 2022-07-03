@@ -14,7 +14,7 @@ public class HealthCheckResponse {
     public HashMap<String, Object> returnHealthStatus() {
         HashMap<String, Object> response = new HashMap<>();
         response.put("email", "wima88.ok@gmail.com ");
-        response.put("version", "0.9.0"); // TODO: fetch this from the properties file
+        response.put("version", "1.0.0"); // TODO: fetch this from the properties file
         response.put("status", "OK");
         return response;
     }
