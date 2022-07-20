@@ -1,33 +1,58 @@
 package works.wima.Routes;
 
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import org.apache.camel.Exchange;
+import org.apache.camel.Expression;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.redis.RedisConstants;
 import org.apache.camel.model.dataformat.JsonLibrary;
+import org.apache.el.stream.Stream;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
 public class Twitter extends RouteBuilder {
 
+
     @Override
     public void configure() {
+
+        onException().stop();
         from("{{LABELS_QUEUE}}")
                 .log("this is twitter's body ${body}")
                 .unmarshal().json(JsonLibrary.Jackson)
                 .log("this is twitter's body after marshal ${body.size()}")
                 .setHeader("numberOfKeywords",  simple("${body.size()}"))
                 .setHeader("keywords", simple("${body}"))
+                .setHeader("userId",simple("2953199314"))
                 .log("the number of keywords are ${header.numberOfKeywords}")
                 .setHeader(Exchange.HTTP_QUERY, constant("user.fields=created_at,description,entities,id,location,name,pinned_tweet_id,profile_image_url,protected,public_metrics,url,username,verified,withheld&expansions=pinned_tweet_id"))
                 .setHeader("Authorization",simple("Bearer ${env:TWITTER_BEARER_TOKEN}"))
-                .toD("${env:TWITTER_BASE_URL}/users/2953199314/followers?throwExceptionOnFailure=false")
+                .setBody(simple("${env:TWITTER_BASE_URL}/users/${header.userId}/following?throwExceptionOnFailure=false,${env:TWITTER_BASE_URL}/users/${header.userId}/followers?throwExceptionOnFailure=false"))
+                .split(body().tokenize(","))
+                .streaming()
+                .parallelProcessing()
+                .log("This is the split ${body}")
+                .toD("${body}")
+                .aggregate(new ArrayListAggregationStrategy()).constant(false)
+                .completionSize(2)
                 .setHeader("redisKeyForTwitterUser",simple(UUID.randomUUID().toString()))
+                .setProperty("initialBody", simple("${body}"))
+                .loop(2)
+                .log("the loop index is ${exchangeProperty.CamelLoopIndex}")
+                .setBody(simple("${body[${exchangeProperty.CamelLoopIndex}]}"))
+                .unmarshal().json(JsonLibrary.Jackson)
+                .log("The after body is ${body}")
                 .choice()
                 .when(header(Exchange.HTTP_RESPONSE_CODE).isLessThan(300))
                 .split()
@@ -68,6 +93,8 @@ public class Twitter extends RouteBuilder {
                 .log("${body}")
                 .otherwise()
                 .log("There was an error with some stuff so we cannot process")
+                .end()
+                .setBody(exchangeProperty("initialBody"))
                 .end();
 
     }
