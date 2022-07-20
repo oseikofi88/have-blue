@@ -157,6 +157,10 @@
       <artifactId>camel-micrometer</artifactId>
       <!-- use the same version as your Camel core version -->
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
