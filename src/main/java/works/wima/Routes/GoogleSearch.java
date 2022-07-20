@@ -23,16 +23,13 @@ public class GoogleSearch extends RouteBuilder {
                 .convertBodyTo(String.class)
                 .log("response code google search is: ${header.CamelHttpResponseCode}")
                 .log("response body from google search: ${body}")
-                .choice().when (jsonpath("$.items[?(@.image.byteSize < 500000 )].link"))
-                .setBody().jsonpath("$.items.*.link")
+                .setBody().jsonpath("$.items[?(@.image.byteSize < 500000 )].link")
                 .setHeader("numberOfLinks",jsonpath("$.length()"))
                 .setHeader("traceId",constant(UUID.randomUUID().toString()))
                 .log("The number of links are ${header.numberOfLinks}")
                 .marshal().json(JsonLibrary.Jackson)
                 .setExchangePattern(ExchangePattern.InOnly)
                 .toD("{{IMAGE_LINKS_QUEUE}}")
-                .otherwise()
-                .log("The links could not be obtained")
                 .end();
 
 
