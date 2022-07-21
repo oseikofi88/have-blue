@@ -1,10 +1,12 @@
 package works.wima;
 
+import com.amazonaws.util.json.Jackson;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import works.wima.Routes.HealthCheckResponse;
@@ -73,6 +75,11 @@ public class RestRouter extends RouteBuilder {
                         }
                     }
                 })
+                .log("$body")
+                .endRest()
+                .post("/webhook/twitter")
+                .route()
+                .log("${body}")
                 .endRest();
     }
 }
